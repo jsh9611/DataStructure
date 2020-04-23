@@ -1,4 +1,4 @@
-package 과제_4__리스트를_이용한_다항식_덧셈;
+package 제4장__리스트를_이용한_다항식_덧셈;
 
 import java.io.*;
 import java.util.Scanner;

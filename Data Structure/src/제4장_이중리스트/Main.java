@@ -1,4 +1,4 @@
-package 과제_4_이중리스트;
+package 제4장_이중리스트;
 
 import java.io.*;
 import java.util.Scanner;
