@@ -4,8 +4,7 @@ import java.io.*;
 import java.util.Scanner;
 
 @SuppressWarnings("serial")
-class NoDeepCopiedObjectException extends RuntimeException {
-}
+class NoDeepCopiedObjectException extends RuntimeException { }
 
 class GenList implements Cloneable {
 	private class ListNode {
@@ -27,7 +26,7 @@ class GenList implements Cloneable {
 			}
 			return listnode;
 		}
-		// 수정하면 안됨.
+		// 수정하면 안됨. 
 		public boolean equals(Object obj) {
 			if (this == obj) {
 				throw new NoDeepCopiedObjectException();
