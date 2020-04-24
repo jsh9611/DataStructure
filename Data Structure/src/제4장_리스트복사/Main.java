@@ -27,7 +27,6 @@ class GenList implements Cloneable {
 			}
 			return listnode;
 		}
-	
 		// 수정하면 안됨.
 		public boolean equals(Object obj) {
 			if (this == obj) {
