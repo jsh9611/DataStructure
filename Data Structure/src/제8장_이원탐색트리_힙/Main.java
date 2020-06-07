@@ -17,7 +17,7 @@ class MaxHeap {
 	
 	public void print() {
 		for(int i = 0; i < size; i++)
-			System.out.print(heap[i] + " ");
+			System.out.print(heap[i+1] + " ");
 	}
 	
 	// 아래 2개의 메소드(insert, delete)를 작성하시오.
@@ -27,7 +27,24 @@ class MaxHeap {
 	 * @param x 삭입하고자 하는 데이터
 	 */
 	public void insert(int x) {
+		if (size == heap.length-1) {
+			System.out.println("heap size 초과");
+			return;
+		}
+		int i = ++size;
+		while(true) {
+			if(i == 1) {
+				break;
+			}
+			if(x < heap[i/2]) {
+				break;
+			}
+			heap[i] = heap[i/2];
+			i = i/2;
+			 
+		}
 		
+		heap[i] = x;
 		
 	}
 	
@@ -38,8 +55,32 @@ class MaxHeap {
 	 */
 	public int delete() {
 		
+		if(size==0) {
+			System.out.println("Error");
+			return 0;
+		}
+		int item = heap[1]; // 우선순위가 가장 높은 노드부터 삭제
+		int temp = heap[size];
 		
-		return 0;
+		size--; //마지막 원소 삭제
+		int i = 1;
+		int j = 2;
+		while(j <= size) {
+			if(j < size) {
+				if (heap[j] < heap[j+1]) {
+					j = j+1;
+				}
+			}
+			if (temp >= heap[j]) {
+				break;
+			}
+			heap[i] = heap[j];
+			i = j;
+			j = j*2;
+		}
+		heap[i] = temp;
+		
+		return item;
 	}
 }
 	

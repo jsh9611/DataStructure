@@ -11,13 +11,17 @@ class BinarySearchTree {
 	}
 	
 	private TreeNode rootNode;
+	private TreeNode tempNode;
+	private TreeNode tempnextNode;
 	
 	public void insert(String x) {
 		rootNode = insertKey(rootNode, x);
+		tempNode = rootNode;
+		tempnextNode = rootNode;
 	}
 	
 	public TreeNode find(String x) {
-		TreeNode t = rootNode;
+		TreeNode t = tempNode;
 		int result;
 		
 		while (t != null) {
@@ -78,13 +82,19 @@ class BinarySearchTree {
 	 * 이진 트리에서 x 를 찾아서 그 노드를 삭제한다.
 	 * @param x 삭제하고자 하는 데이터
 	 */
+	public TreeNode MaxNode(TreeNode m) {
+		if (m == null) return null;
+		if (m.right == null) return m;
+		return MaxNode(m.right);
+	}
+
 	public void delete(String x) {
-		TreeNode findNode = find(x);
+		TreeNode findNode = tempnextNode;
 		TreeNode deleteNode = null;	//삭제할 key값을 가진 노드
-		TreeNode parent = null;		//삭제할 노드의 부모 노드
+		TreeNode parent = tempNode;		//삭제할 노드의 부모 노드
 		
 		while(findNode != null) {
-			if(findNode.key == x) {
+			if(findNode.key.equals(x)) {
 				deleteNode = findNode;
 				break;
 			}
@@ -95,30 +105,40 @@ class BinarySearchTree {
 				findNode = findNode.left;
 			}
 		}
-		if (deleteNode == null) return;
-		if(deleteNode.left == null && deleteNode.right == null) {
-			if(parent.left.key.equals(deleteNode.key)) {
+		
+		if (deleteNode == tempNode) {
+			System.out.println("(아이엠그루트 : " + tempNode.key + " )");
+		}
+		if(deleteNode == null) return;
+		if (deleteNode.left == null && deleteNode.right == null) {
+			//if deleteNode is leaf node
+			if (parent.left.key == deleteNode.key) {
 				parent.left = null;
 			} else {
 				parent.right = null;
 			}
-		} else if(deleteNode.left == null || deleteNode.right == null) {
-			if(deleteNode.left != null) {
-				if(parent.left.key.equals(deleteNode.key)) {
+			
+		} else if (deleteNode.left == null || deleteNode.right == null) {
+			if(deleteNode.left != null) {//deletenode가 왼쪽 트리만 가지고 있을경우
+				if (parent.left == deleteNode) {//부모의 왼쪽에 지울 노드가 위치할 경우
 					parent.left = deleteNode.left;
-				} else {
+				} else {//지울 노드가 부모의 오른쪽에 위치할 경우
 					parent.right = deleteNode.left;
 				}
-			} else {
-				if(parent.left.key.equals(deleteNode.key)) {
+			}else {//deleteNode가 오른쪽 트리만 가지고 있을 경우
+				if (parent.left == deleteNode) {//부모의 왼쪽에 지울 노드가 위치할 경우
 					parent.left = deleteNode.right;
 				} else {
 					parent.right = deleteNode.right;
 				}
 			}
-		} else {
-			TreeNode q = deleteNode.left;
+			
+		} else {	//deleteNode가 중간에 걸쳐있을 경우!!(차수가 2) 	
+			TreeNode q = MaxNode(deleteNode.left);
 			deleteNode.key = q.key;
+			System.out.println("#" + q.key);
+			tempNode = tempnextNode;
+			tempnextNode = deleteNode.left;
 			delete(deleteNode.key);
 		}
 	}

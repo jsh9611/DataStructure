@@ -58,8 +58,19 @@ class BinarySearchTree {
 	 * @return 사입한 이원탐색트리의 부모 노드
 	 */
 	private TreeNode insertKey(TreeNode t, String x) {
-		
-		return null;
+		if (t == null) {
+			TreeNode newNode = new TreeNode();
+			newNode.key = x;
+			return newNode;
+		} else if (x.compareTo(t.key) < 0) {
+			t.left = insertKey(t.left, x);
+			return t;
+		} else if (x.compareTo(t.key) > 0) {
+			t.right = insertKey(t.right, x);
+			return t;
+		} else {
+			return t;
+		}
 	}
 
 }
