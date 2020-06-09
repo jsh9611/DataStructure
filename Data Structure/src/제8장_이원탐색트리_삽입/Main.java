@@ -96,3 +96,40 @@ class Main {
 	}
 	
 }
+
+/*
+예시1
+입력
+I S
+I J
+I B
+I D
+I U
+I M
+I R
+I Q
+I A
+I G
+I E
+P
+출력
+((((A)B(D((E)G)))J(M((Q)R)))S(U))
+예시2
+입력
+I A
+I B
+I C
+P
+출력
+(A(B(C)))
+예시3
+입력
+I P
+I C
+I X
+I A
+I D
+P
+출력
+(((A)C(D))P(X))
+ */

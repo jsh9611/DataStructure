@@ -13,7 +13,6 @@ class BinarySearchTree {
 	private TreeNode rootNode;
 	private TreeNode tempNode;
 	private TreeNode tempnextNode;
-	
 	public void insert(String x) {
 		rootNode = insertKey(rootNode, x);
 		tempNode = rootNode;
@@ -105,11 +104,9 @@ class BinarySearchTree {
 				findNode = findNode.left;
 			}
 		}
-		
-		if (deleteNode == tempNode) {
-			System.out.println("(아이엠그루트 : " + tempNode.key + " )");
-		}
+	
 		if(deleteNode == null) return;
+		
 		if (deleteNode.left == null && deleteNode.right == null) {
 			//if deleteNode is leaf node
 			if (parent.left.key == deleteNode.key) {
@@ -117,7 +114,7 @@ class BinarySearchTree {
 			} else {
 				parent.right = null;
 			}
-			
+		
 		} else if (deleteNode.left == null || deleteNode.right == null) {
 			if(deleteNode.left != null) {//deletenode가 왼쪽 트리만 가지고 있을경우
 				if (parent.left == deleteNode) {//부모의 왼쪽에 지울 노드가 위치할 경우
@@ -125,6 +122,7 @@ class BinarySearchTree {
 				} else {//지울 노드가 부모의 오른쪽에 위치할 경우
 					parent.right = deleteNode.left;
 				}
+				
 			}else {//deleteNode가 오른쪽 트리만 가지고 있을 경우
 				if (parent.left == deleteNode) {//부모의 왼쪽에 지울 노드가 위치할 경우
 					parent.left = deleteNode.right;
@@ -133,10 +131,9 @@ class BinarySearchTree {
 				}
 			}
 			
-		} else {	//deleteNode가 중간에 걸쳐있을 경우!!(차수가 2) 	
+		} else {	//deleteNode가 중간에 걸쳐있을 경우!!(차수가 1이상) 	
 			TreeNode q = MaxNode(deleteNode.left);
 			deleteNode.key = q.key;
-			System.out.println("#" + q.key);
 			tempNode = tempnextNode;
 			tempnextNode = deleteNode.left;
 			delete(deleteNode.key);
@@ -168,3 +165,52 @@ class Main {
 	}
 	
 }
+
+/*
+예시1
+입력
+I N
+I E
+I U
+I W
+I H
+I C
+I Q
+I K
+I J
+D W
+P
+출력
+(((C)E(H((J)K)))N((Q)U))
+예시2
+입력
+I N
+I E
+I U
+I W
+I H
+I C
+I Q
+I K
+I J
+D N
+P
+출력
+(((C)E(H(J)))K((Q)U(W)))
+예시3
+입력
+I N
+I E
+I U
+I W
+I H
+I C
+I Q
+I K
+I J
+D H
+P
+출력
+((((J)K)E(H((J)K)))N((Q)U(W)))
+//테스트케이스 출력 오류로 (((C)E((J)K))N((Q)U(W)))가 맞는 답임.
+*/
