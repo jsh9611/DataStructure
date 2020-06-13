@@ -189,3 +189,61 @@ class Main {
 		levelorder(root);
 	}
 }
+/*
+7장. 연결 리스트를 이용한 이진트리의 순회
+이진 트리를 입력받아 이를 중위순회, 전위순회, 후위순회, 레벨순회를 하여 그 결과를 출력하는 프로그램을 작성하시오.
+    /***********************************
+     * 아래 4개의 메소드를 작성하시오. *
+     ***********************************/
+/*
+    public static void inorder(BinaryTree node) {
+
+    }
+    
+    public static void preorder(BinaryTree node) {
+
+    }
+    
+    public static void postorder(BinaryTree node) {
+
+    }
+        
+    public static void levelorder(BinaryTree node) {
+
+    }
+}
+
+예시 1
+입력
+( A ( B ( D ( H I ) E ( J null ) ) C ( F G ( K null ) ) ) )
+출력
+H D I B J E A F C K G
+A B D H I E J C F G K
+H I D J E B F K G C A
+A B C D E F G H I J K
+예시 2
+입력
+( A ( B ( D E ( null H ) ) C ( F G ( I null ) ) ) )
+출력
+D B E H A F C I G
+A B D E H C F G I
+D H E B F I G C A
+A B C D E F G H I
+예시3
+입력
+( A ( B ( C ( D null ) null ) null ) )
+출력
+D C B A
+A B C D
+D C B A
+A B C D
+예시4
+입력
+( + ( * ( 2 3 ) / ( 6 * ( 4 8 ) ) ) )
+출력
+2 * 3 + 6 / 4 * 8
++ * 2 3 / 6 * 4 8
+2 3 * 6 4 8 * / +
++ * / 2 3 6 * 4 8
+
+*/
