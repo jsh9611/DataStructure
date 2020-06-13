@@ -19,61 +19,135 @@ class BinaryTree {
 	}
 }
 
-// Stack 클래스에 필요한 필드와 메소드를 추가하고, push, pop, isEmpty를 수정하여 완성하시오.
+class ListNode {
+	BinaryTree data;
+	ListNode link;
+}
+
 class Stack {
-	
-	// 필요한 필드와 메소드를 추가하시오.
-	
-	
-	
-		public void push(BinaryTree item) {
-			
-			
+	ListNode top;
+
+	public void push(BinaryTree item) {
+		ListNode newNode = new ListNode();
+		newNode.data = item;
+		newNode.link = top;
+		top = newNode;
+	}
+
+	public BinaryTree pop() {
+		if(isEmpty()) return null;
+		else {
+			BinaryTree t = top.data;
+			top = top.link;
+			return t;
 		}
-	
-		public BinaryTree pop() {
-			
-			
-			return null;
-		}
-	
-		public boolean isEmpty() {
-			
-			
-			return true;
-		}
+	}
+
+	public boolean isEmpty() {
+		return (top == null);
+	}
+	public BinaryTree peek() {
+		if (isEmpty()) return null;
+		else return top.data;
+	}
 }
 
 // 추가적으로 필요한 클래스(예를 들어 큐)가 있으면 작성하시오.
-
-
-
+class Queue {
+	ListNode head = null;	
+	ListNode front = null;
+	ListNode rear = null;
+	
+	public void Queue() {
+		head = new ListNode();
+		front = null;
+		rear = null;
+	}
+	public void enqueue(BinaryTree data){
+		if(!isEmpty()){
+			ListNode newNode = new ListNode();
+			newNode.data = data;
+			rear.link = newNode;
+			rear = newNode;
+		}else{
+			ListNode newNode = new ListNode();
+			newNode.data = data;
+			newNode.link = null;
+			head = newNode;
+			front = newNode;
+			rear = newNode;
+		}
+	}
+	
+	public BinaryTree dequeue(){
+		BinaryTree v = front.data;
+		if(front == rear){
+			head = null;
+			rear = head;
+			front = rear;
+			return v;
+		}else{
+			head = front.link;
+			front = front.link;
+			return v;
+		}
+	}
+	public boolean isEmpty(){
+		return (head == null);
+	}
+}
 
 class Main {
 	
-	
-	/***********************************
-	 * 아래 4개의 메소드를 작성하시오. *
-	***********************************/
-
+	//중위 순회(inorder traversal)
 	public static void inorder(BinaryTree node) {
-		
-		
+		if(node.left != null) {
+			inorder(node.left);
+		}
+		System.out.print(node.data + " ");
+		if(node.right != null) {
+			inorder(node.right);
+		}
 	}
 	
+	//전위 순회(preorder traversal)
 	public static void preorder(BinaryTree node) {
-		
-		
+		System.out.print(node.data + " ");
+		if(node.left != null) {
+			preorder(node.left);
+		}
+		if(node.right != null) {
+			preorder(node.right);
+		}
 	}
 	
+	//후위 순회(postorder traversal)
 	public static void postorder(BinaryTree node) {
-		
-		
+		if(node.left != null) {
+			postorder(node.left);
+		}
+		if(node.right != null) {
+			postorder(node.right);
+		}
+		System.out.print(node.data + " ");
 	}
 	
-	public static void levelorder(BinaryTree node) {
+	//레벨 순서 순회(level order traversal)
+	public static void levelorder(BinaryTree node) { 
+		Queue queue = new Queue();
+		queue.enqueue(node);
+		BinaryTree n;
 		
-		
+		while(!queue.isEmpty()) {
+			n = queue.dequeue();
+			System.out.print(n.data + " ");
+			if(n.left != null) {
+				queue.enqueue(n.left);
+			}
+			if(n.right != null) {
+				queue.enqueue(n.right);
+			}
+		}
 	}
 	
 	// 아래 main 메소드는 수정하지 마시오.
@@ -104,7 +178,6 @@ class Main {
 				stack.push(new BinaryTree(token));
 			}
 		}
-		
 		scan.close();
 		
 		inorder(root);

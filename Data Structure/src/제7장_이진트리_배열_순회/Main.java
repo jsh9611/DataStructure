@@ -3,11 +3,6 @@ package 제7장_이진트리_배열_순회;
 import java.io.*;
 import java.util.Scanner;
 
-// 필요한 클래스는 추가하시오.
-
-
-
-
 class BinaryTree {
 	String[] array;
 	public static final int INIT_SIZE = 10;
@@ -26,7 +21,7 @@ class BinaryTree {
 		}
 		array[index] = data;
 	}
-	
+
 	// 배열에서 원소를 얻는 메소드
 	public String get(int index) {
 		if (index >= array.length)
@@ -50,28 +45,37 @@ class BinaryTree {
 	public void levelorder() {
 		levelorder(ROOT);
 	}
-	
-	/*************************************
-	 * 작성해야 하는 함수
-	 *************************************/
 
 	private void inorder(int idx) {
-		
+		if(idx >= array.length || array[idx] == null) return;
+		inorder(idx*2);
+		System.out.print(array[idx] + " ");
+		inorder(idx*2+1);
 	}
 	
 	private void preorder(int idx) {
-		
+		if(idx >= array.length || array[idx] == null) return;
+		System.out.print(array[idx] + " ");
+		preorder(idx*2);
+		preorder(idx*2+1);
 	}
 	
 	private void postorder(int idx) {
-		
+		if(idx >= array.length || array[idx] == null) return;
+		postorder(idx*2);
+		postorder(idx*2+1);
+		System.out.print(array[idx] + " ");
 	}
 	
 	private void levelorder(int idx) {
-		
+		for (int i = 0; i<array.length; i++) {
+			if(array[i] == null) {
+				continue;
+			}
+			System.out.print(array[i] + " ");
+		}
 	}
 }
-
 
 class Main {
 	
