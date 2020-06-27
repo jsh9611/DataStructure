@@ -37,6 +37,8 @@ class Graph {
 	 */
 	public ArrayList<Integer> shortestPath(int startVertex) {
 		ArrayList<Integer> path = new ArrayList<Integer>(); // 최단 경로를 기록하기 위한 변수
+		int n = noVertex;
+		
 		// path.add(startVertex);
 		
 		// 코드를 작성하시오.
